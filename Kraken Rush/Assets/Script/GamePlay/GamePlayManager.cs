@@ -1,10 +1,12 @@
 using Firebase.Database;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GamePlayManager : MonoBehaviour
 {
@@ -16,12 +18,17 @@ public class GamePlayManager : MonoBehaviour
     public static float multiplierScore = 1f;
     public static float multiplierCoin = 1f;
 
+
     private float timeElapsed;
 
     private float scoreIncreaseRate = 100f;
 
     public TextMeshProUGUI txtScore;
     public TextMeshProUGUI txtCoin;
+
+    public TextMeshProUGUI txtSumScore;
+    public TextMeshProUGUI txtSumCoin;
+
     public TextMeshProUGUI txtMultipilerScore;
 
     public TextMeshProUGUI txtWaitForPlay;
@@ -37,6 +44,10 @@ public class GamePlayManager : MonoBehaviour
 
     [Header("PAGE")]
     [SerializeField] private GameObject pausePage;
+    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject newRecordText;
+
+
 
     void Start()
     {
@@ -53,18 +64,12 @@ public class GamePlayManager : MonoBehaviour
     void FixedUpdate()
     {
         Singleton.Instance.LoadScore();
-        Debug.Log(Singleton.Instance.scorePlayer);
-        if (score >= Singleton.Instance.scorePlayer)
-        {
-            SendScore();
-            
-        }
 
         if (waitForplay.activeSelf)
         {
             Singleton.Instance.isReadyToPlay = false;
             isCoolingDown = true;
-            PlayerController.forwardSpeed =  0f;
+            PlayerController.forwardSpeed = 0f;
             if (isCoolingDown)
             {
                 coolDownDuration -= Time.deltaTime;
@@ -83,19 +88,42 @@ public class GamePlayManager : MonoBehaviour
         if (!Singleton.Instance.isReadyToPlay)
             return;
 
-        txtMultipilerScore.text = "x"+ multiplierScore.ToString();
+        txtMultipilerScore.text = "x" + multiplierScore.ToString();
         timeElapsed += Time.deltaTime;
-        // อัปเดตและแสดงค่า score ที่แสดงบน UI
-        UpdateDisplayedScore();
-        IncreaseScore();
 
 
         if (Singleton.Instance.isMultiplierScore)
             StartCoroutine(CheckLifeTimeMultiplierScore());
         if (Singleton.Instance.isMultiplierCoin)
             StartCoroutine(CheckLifeTimeMultiplierCoin());
-   
 
+
+        UpdateDisplayedScore();
+        IncreaseScore();
+
+        if (PlayerController.isGameover) 
+        { 
+            Gameover();
+        }
+    }
+
+
+    private void Gameover()
+    {
+        gameOverPanel.SetActive(true);
+        if (score >= Singleton.Instance.scorePlayer)
+        {
+            newRecordText.SetActive(true);
+            SendScore();
+        }
+        else
+        {
+            newRecordText.SetActive(false);
+        }
+
+        StartCoroutine(UpdateScoreAndCoin());
+
+        Debug.Log("Game over");
     }
 
     IEnumerator CheckLifeTimeMultiplierScore()
@@ -114,6 +142,9 @@ public class GamePlayManager : MonoBehaviour
 
     private void IncreaseScore()
     {
+        if (PlayerController.isGameover)
+            return;
+            
         score = Mathf.FloorToInt(timeElapsed * scoreIncreaseRate * multiplierScore);
     }
 
@@ -125,10 +156,10 @@ public class GamePlayManager : MonoBehaviour
 
     private void UpdateDisplayedScore()
     {
-        displayedScore = (int)Mathf.Lerp(displayedScore, score, Time.deltaTime * 1f);
+        displayedScore = (int)Mathf.Lerp(score, CalculateTargetScore(), Time.deltaTime * 1f);
         txtScore.text = displayedScore.ToString("D10");
 
-        txtCoin.text = coin.ToString("D7");
+        txtCoin.text = CalculateTargetCoin().ToString("D7");
     }
 
     public void SendScore()
@@ -159,5 +190,48 @@ public class GamePlayManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
 
     }
+
+    private IEnumerator UpdateScoreAndCoin()
+    {
+        float elapsedTime = 0f;
+        int targetScore = CalculateTargetScore(); // คำนวณค่าเป้าหมายของคะแนน
+        int targetCoin = CalculateTargetCoin(); // คำนวณค่าเป้าหมายของเหรียญ
+
+        while (elapsedTime < 2f)
+        {
+            // คำนวณค่าใหม่ของคะแนนและเหรียญในเวลาปัจจุบัน
+            int currentScore = Mathf.FloorToInt(Mathf.Lerp(0f, targetScore, elapsedTime / 0.5f));
+            int currentCoin = Mathf.FloorToInt(Mathf.Lerp(0f, targetCoin, elapsedTime / 0.5f));
+
+            // อัพเดตค่าข้อความของ txtSumScore และ txtSumCoin
+            txtSumScore.text = currentScore.ToString("D10");
+            txtSumCoin.text = currentCoin.ToString();
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        // กำหนดค่าสุดท้ายของคะแนนและเหรียญ
+        txtSumScore.text = targetScore.ToString("D10");
+        txtSumCoin.text = targetCoin.ToString();
+
+        // เรียกเมธอด Gameover หลังจากนับเสร็จเพียงครั้งเดียว
+        //Gameover();
+    }
+ 
+
+    private int CalculateTargetScore()
+    {
+        int targetScore = score; // คำนวณค่าเป้าหมายของคะแนนที่ผู้เล่นทำได้
+
+        return targetScore; // คำนวณคะแนนที่ถูกต้องตามต้องการ
+    }
+
+    private int CalculateTargetCoin()
+    {
+        int targetCoin = coin;
+
+        return targetCoin; // คำนวณเหรียญที่ถูกต้องตามต้องการ
+    }
+
 
 }

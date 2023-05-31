@@ -11,8 +11,6 @@ public class Singleton : MonoBehaviour
     public int characterNum { get; private set; }
     public int coin { get; private set; }
     public int scorePlayer { get; private set; }
-
-    public int isCloseFirstpage { get; private set; }
     public int dayReward { get; private set; }
 
 
@@ -59,7 +57,6 @@ public class Singleton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isCloseFirstpage = 0;
 
 
         multiplierCoin = 7f;
@@ -68,10 +65,7 @@ public class Singleton : MonoBehaviour
         protection = 7f;
         bonusMode = 7f;
     }
-    public void CloseFirstPage(int numClose)
-    {
-        isCloseFirstpage = numClose;
-    }
+
     public void DayReward(int numDay)
     {
         dayReward += numDay;

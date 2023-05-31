@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public enum SIDE { Left, Mid, Right }
 public enum HitX { Left, Mid, Right, None }
-public enum HitY { Up, Mid, Down, None }
+public enum HitY { Up, Mid, Down, Low, None }
 public enum HitZ { Forward, Mid, Backward, None }
 
 public class PlayerController : MonoBehaviour
@@ -18,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private float newXPos = 0f;
     public float xValue;
 
-  
+    public Animator playerAnim;
 
     private CharacterController controller;
 
@@ -40,27 +41,38 @@ public class PlayerController : MonoBehaviour
 
 
     public Vector3 jumpDirection;
+    public  int life = 3;
+    public Image[] lifeImage;
 
-
-
+    public static bool isGameover;
     // Start is called before the first frame update
     void Start()
     {
+        isGameover = false;
         transform.position = Vector3.zero;
 
         controller = GetComponent<CharacterController>();
         ColHeight = controller.height;
         ColCenterY = controller.center.y;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (life <= 0)
+            life = 0;
+
+        if (isGameover)
+        {
+            forwardSpeed = 0f;
+            return;
+        }
+
         swipeLeft = Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow);
         swipeRight = Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow);
         swipeUp = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
         swipeDown = Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
-
 
         
 
@@ -135,6 +147,7 @@ public class PlayerController : MonoBehaviour
         Jump();
         Roll();
 
+        Debug.Log(life);
     }
 
     private void Jump()
@@ -145,7 +158,7 @@ public class PlayerController : MonoBehaviour
             {
                 jumpDirection = transform.forward;
                 y = jumpPower;
-
+                playerAnim.CrossFadeInFixedTime("Jump", 0f);
                 inJump = true;
             }
         }
@@ -176,6 +189,7 @@ public class PlayerController : MonoBehaviour
         if (swipeDown)
         {
             RollCounter = 0.2f;
+            playerAnim.CrossFadeInFixedTime("Duck", 0f);
 
             inRoll = true;
 
@@ -184,7 +198,10 @@ public class PlayerController : MonoBehaviour
 
             y -= 10f;
             inJump = false;
+
+           
         }
+        
     }
 
     public void OnCharactorColliderHit(Collider col)
@@ -192,6 +209,67 @@ public class PlayerController : MonoBehaviour
         hitX = GetHitX(col);
         hitY = GetHitY(col);
         hitZ = GetHitZ(col);
+
+        if(hitZ == HitZ.Forward && hitX == HitX.Mid)
+        {
+            if(hitY == HitY.Low)
+            {
+                TakeDmgPlayer();
+
+            }
+            else if(hitY == HitY.Down)
+            {
+                TakeDmgPlayer();
+
+
+            }
+            else if (hitY == HitY.Mid)
+            {
+                TakeDmgPlayer();
+
+            }
+            else if(hitY == HitY.Up)
+            {
+                TakeDmgPlayer();
+
+
+            }
+        }
+        else if (hitX == HitX.Mid)
+        {
+            if(hitX == HitX.Right)
+            {
+                TakeDmgPlayer();
+
+
+            }
+            else if (hitX == HitX.Left)
+            {
+                TakeDmgPlayer();
+
+            }
+        }
+        else
+        {
+            if(hitX == HitX.Right)
+            {
+                TakeDmgPlayer();
+
+
+            }
+            else if(hitX == HitX.Left)
+            {
+                TakeDmgPlayer();
+
+            }
+        }
+
+    }
+
+    private void TakeDmgPlayer()
+    {
+        life -= 1;
+        CheckImageLife();
     }
 
     public HitX GetHitX(Collider col)
@@ -223,7 +301,9 @@ public class PlayerController : MonoBehaviour
         float average = ((min_y + max_y) / 2f - char_bounds.min.y) / char_bounds.size.y;
 
         HitY hit;
-        if (average < 0.33f)
+        if (average < 0.17f)
+            hit = HitY.Low;
+        else if (average < 0.33f)
             hit = HitY.Down;
         else if (average < 0.66f)
             hit = HitY.Mid;
@@ -249,5 +329,21 @@ public class PlayerController : MonoBehaviour
         else
             hit = HitZ.Forward;
         return hit;
+    }
+
+
+    public void CheckImageLife()
+    {
+        int numlife = 3;
+        if (life <= 0)
+        {
+            isGameover = true;         
+        }
+
+        for (int i = numlife - 1; i >= life; i--)
+        {
+            lifeImage[i].gameObject.SetActive(false);       
+        }    
+
     }
 }

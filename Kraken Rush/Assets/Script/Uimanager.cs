@@ -9,9 +9,7 @@ using UnityEngine.UI;
 public class Uimanager : MonoBehaviour
 {
     [Header("Page In Game")]
-    public GameObject firstPage;
     public GameObject rewardPage;
-    public GameObject upgradePage;
     public GameObject leaderBoardPage;
     public GameObject missionsPage;
     public GameObject shopPage;
@@ -41,12 +39,7 @@ public class Uimanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        #region Check First Page
-        if (Singleton.Instance.isCloseFirstpage == 1)
-        {
-            firstPage.SetActive(false); 
-        }
-        #endregion
+
 
 
         foreach (TextMeshProUGUI txt in coinText) 
@@ -98,11 +91,7 @@ public class Uimanager : MonoBehaviour
 
 
     }
-    public void CloseFirstPage()
-    {
-        Singleton.Instance.CloseFirstPage(1);
-        firstPage.SetActive(false);
-    }
+
     public void RewardPage()
     {
         rewardPage.SetActive(true);
@@ -110,16 +99,6 @@ public class Uimanager : MonoBehaviour
     public void CloseRewardPage()
     {
         rewardPage.SetActive(false);
-    }
-
-    public void UpgradePage()
-    {
-        upgradePage.SetActive(true);
-    }
-
-    public void CloseUpGradePage()
-    {
-        upgradePage.SetActive(false);
     }
 
     public void LeaderPage()
