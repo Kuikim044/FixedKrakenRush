@@ -41,7 +41,7 @@ public class OnCollision : MonoBehaviour
             GamePlayManager.multiplierScore = 2f;
             Destroy(other.gameObject);
         }
-        if (other.gameObject.CompareTag("Obstrucle"))
+        if (other.gameObject.CompareTag("Obstrucle") )
         {
             controller.OnCharactorColliderHit(other);
         }

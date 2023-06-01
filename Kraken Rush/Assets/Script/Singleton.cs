@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static DisplayItemData;
 using static UnityEditor.Progress;
 
 public class Singleton : MonoBehaviour
@@ -106,6 +108,22 @@ public class Singleton : MonoBehaviour
 
     }
 
-
-
+    public float GetItemDuration(ItemName itemName)
+    {
+        switch (itemName)
+        {
+            case ItemName.CurrencyMultiplier:
+                return multiplierCoin;
+            case ItemName.Scoremultiplier:
+                return multiplierScore;
+            case ItemName.CoinMagnet:
+                return magnet;
+            case ItemName.BonusMode:
+                return bonusMode;
+            case ItemName.Protection:
+                return protection;
+            default:
+                return 0f;
+        }
+    }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2730024100152026177}
   - component: {fileID: 4176929766323914217}
   - component: {fileID: 8952459413364469945}
+  - component: {fileID: -6878222094933495058}
   m_Layer: 0
   m_Name: item-Magnetic
   m_TagString: Untagged
@@ -110,8 +111,22 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.08131641, y: 0.051681362, z: 0.09293856}
-  m_Center: {x: 0, y: 0.0016553322, z: -0.036469273}
+  m_Size: {x: 0.11956475, y: 0.08375906, z: 0.09293856}
+  m_Center: {x: 0.0017284176, y: -0.0026245513, z: -0.036469266}
+--- !u!114 &-6878222094933495058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4531186392826283412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 158dd32234866f446aa4e7bc68cd3ddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ui: {fileID: 0}
+  itemData: {fileID: 11400000, guid: 6cb6d3a8dad43a44db6578bbc38cf33b, type: 2}
 --- !u!1001 &7792978060543727948
 PrefabInstance:
   m_ObjectHideFlags: 0

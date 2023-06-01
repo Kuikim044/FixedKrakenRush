@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5625031972441448349}
   - component: {fileID: 6634891474682477125}
+  - component: {fileID: -6907299030214440562}
   m_Layer: 0
   m_Name: item-MultiplierCoin
   m_TagString: MultiplierCoin
@@ -44,8 +45,22 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.1120051
-  m_Center: {x: 0.005094528, y: -0.02918768, z: 0.047083497}
+  m_Radius: 1.2851102
+  m_Center: {x: -0.017851353, y: -0.02918768, z: -0.018645525}
+--- !u!114 &-6907299030214440562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4997852550312363303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 158dd32234866f446aa4e7bc68cd3ddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ui: {fileID: 0}
+  itemData: {fileID: 0}
 --- !u!1001 &5948569953627753653
 PrefabInstance:
   m_ObjectHideFlags: 0

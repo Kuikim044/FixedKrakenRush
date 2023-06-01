@@ -85,6 +85,7 @@ public class GamePlayManager : MonoBehaviour
                 }
             }
         }
+
         if (!Singleton.Instance.isReadyToPlay)
             return;
 

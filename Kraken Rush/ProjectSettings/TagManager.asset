@@ -11,6 +11,7 @@ TagManager:
   - PlayerBubble
   - CoinDetector
   - Obstrucle
+  - DisplayItem
   layers:
   - Default
   - TransparentFX

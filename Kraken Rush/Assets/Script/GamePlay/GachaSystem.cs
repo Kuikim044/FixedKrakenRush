@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum Rarity
 {
@@ -30,6 +32,7 @@ public class GachaItem
     public string Name;
     public int itemID;
     public int amount;
+    public Sprite itemImage;
     public Rarity rarity;
     
 
@@ -59,6 +62,9 @@ public class GachaSystem : MonoBehaviour
 
     public GachaScriptable itemList;
 
+    public Image imageItem;
+    public TextMeshProUGUI nameItem;
+    public GameObject openDisPlayPanel;
 
     private void Start()
     {
@@ -102,19 +108,58 @@ public class GachaSystem : MonoBehaviour
             {
                 Debug.Log("You got " + item.Name + " (Rarity: " + item.rarity + ")");
                 inventory.Add(item);
+                DisplayInventory(item.itemID);
                 GiveReward(item.itemID);
                 break;
             }
         }
     }
 
-    public void DisplayInventory()
+    public void DisplayInventory(int ItemId)
     {
+        openDisPlayPanel.SetActive(true); 
         // แสดงรายการไอเท็มในคลัง
-        foreach (GachaItem item in inventory)
+        foreach (GachaItem item in gachaItems)
         {
-            Debug.Log(item.Name);
+
+            if (item.itemID == ItemId)
+            {
+                if (item.reward == RewardGacha.Coin)
+                {
+                    nameItem.text = item.Name;
+                    imageItem.sprite = item.itemImage;
+                }
+                    
+                if (item.reward == RewardGacha.McToken)
+                {
+                    nameItem.text = item.Name;
+                    imageItem.sprite = item.itemImage;
+                }
+
+                if (item.reward == RewardGacha.Skin)
+                {
+                    nameItem.text = item.Name;
+                    imageItem.sprite = item.itemImage;
+                }
+
+                if (item.rewardItem == RewardItem.Skipper)
+                {
+                    nameItem.text = item.Name;
+                    imageItem.sprite = item.itemImage;
+                }
+                if (item.rewardItem == RewardItem.ScoreBooster)
+                {
+                    nameItem.text = item.Name;
+                    imageItem.sprite = item.itemImage;
+                }
+
+                break;
+            }
         }
+    }
+    public void TapToCloseDisplayItem()
+    {
+        openDisPlayPanel.SetActive(false);
     }
     private void GiveReward(int ItemId)
     {

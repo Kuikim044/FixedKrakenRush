@@ -132,6 +132,16 @@ public class Uimanager : MonoBehaviour
     {
         settingPage.SetActive(false);
     }
+
+    public void ShopPage()
+    {
+        shopPage.SetActive(true);
+    }
+
+    public void CloseShopPage()
+    {
+        shopPage.SetActive(false);
+    }
     #region Runner Page
     public void RunnerPage()
     {

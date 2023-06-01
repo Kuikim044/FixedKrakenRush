@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -4778488817284102535}
   - component: {fileID: -6680705065649885639}
   - component: {fileID: 7870361870746307590}
+  - component: {fileID: -8963645706019533741}
   m_Layer: 0
   m_Name: Item-Score
   m_TagString: Coin
@@ -47,8 +48,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.0779173
-  m_Center: {x: -0.011168957, y: 0.016466737, z: 0}
+  m_Radius: 1.2036961
+  m_Center: {x: 0.031428933, y: 0.016466776, z: 0}
 --- !u!114 &-4778488817284102535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,6 +67,7 @@ MonoBehaviour:
   rotateSpeed: 100
   maxYPosition: 1.2
   minYPosition: 0.8
+  isPrefab: 0
 --- !u!114 &-6680705065649885639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +96,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-8963645706019533741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5250717765095809628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 158dd32234866f446aa4e7bc68cd3ddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ui: {fileID: 0}
+  itemData: {fileID: 0}
 --- !u!1001 &1627803289137350612
 PrefabInstance:
   m_ObjectHideFlags: 0

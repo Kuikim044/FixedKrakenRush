@@ -16,6 +16,7 @@ MonoBehaviour:
   - Name: MC Token
     itemID: 9
     amount: 1
+    itemImage: {fileID: 21300000, guid: 1b6998185b10e4f27a9bbedf3f88b17b, type: 3}
     rarity: 2
     rewardItem: 2
     reward: 1
@@ -24,6 +25,7 @@ MonoBehaviour:
   - Name: Score Booster
     itemID: 8
     amount: 1
+    itemImage: {fileID: 21300000, guid: 4f1abc74ed37ca24ab3c47d86bd03b7f, type: 3}
     rarity: 3
     rewardItem: 0
     reward: 3
@@ -32,6 +34,7 @@ MonoBehaviour:
   - Name: Skipper
     itemID: 7
     amount: 1
+    itemImage: {fileID: 21300000, guid: cd553f403da2c08459765b10766f86c0, type: 3}
     rarity: 3
     rewardItem: 1
     reward: 3
@@ -40,6 +43,7 @@ MonoBehaviour:
   - Name: Coin 5000
     itemID: 6
     amount: 5000
+    itemImage: {fileID: 21300000, guid: d2d330c1442c9774fa02a2055c0f1456, type: 3}
     rarity: 4
     rewardItem: 2
     reward: 0
@@ -48,6 +52,7 @@ MonoBehaviour:
   - Name: Coin 3000
     itemID: 5
     amount: 3000
+    itemImage: {fileID: 21300000, guid: d2d330c1442c9774fa02a2055c0f1456, type: 3}
     rarity: 4
     rewardItem: 2
     reward: 0
@@ -56,6 +61,7 @@ MonoBehaviour:
   - Name: Coin 2000
     itemID: 4
     amount: 2000
+    itemImage: {fileID: 21300000, guid: d2d330c1442c9774fa02a2055c0f1456, type: 3}
     rarity: 4
     rewardItem: 2
     reward: 0
@@ -64,6 +70,7 @@ MonoBehaviour:
   - Name: Coin 1000
     itemID: 3
     amount: 1000
+    itemImage: {fileID: 21300000, guid: d2d330c1442c9774fa02a2055c0f1456, type: 3}
     rarity: 4
     rewardItem: 2
     reward: 0
@@ -72,6 +79,7 @@ MonoBehaviour:
   - Name: Coin 800
     itemID: 2
     amount: 800
+    itemImage: {fileID: 21300000, guid: d2d330c1442c9774fa02a2055c0f1456, type: 3}
     rarity: 4
     rewardItem: 2
     reward: 0
@@ -80,6 +88,7 @@ MonoBehaviour:
   - Name: Coin 500
     itemID: 1
     amount: 500
+    itemImage: {fileID: 21300000, guid: d2d330c1442c9774fa02a2055c0f1456, type: 3}
     rarity: 4
     rewardItem: 2
     reward: 0

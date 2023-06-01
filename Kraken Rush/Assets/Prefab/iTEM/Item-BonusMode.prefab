@@ -342,6 +342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5905633699173782906}
   - component: {fileID: 1210203283715735920}
+  - component: {fileID: 4198257390718572629}
   m_Layer: 0
   m_Name: Item-BonusMode
   m_TagString: Untagged
@@ -382,6 +383,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.8708906, y: 3.332089, z: 7.6543922}
   m_Center: {x: -0.11788559, y: 0.077305555, z: -0.50335693}
+--- !u!114 &4198257390718572629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6538899158129184704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 158dd32234866f446aa4e7bc68cd3ddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ui: {fileID: 0}
+  itemData: {fileID: 0}
 --- !u!1 &6769997099261690101
 GameObject:
   m_ObjectHideFlags: 0

@@ -217,7 +217,7 @@ public class PlayerController : MonoBehaviour
 
         if (swipeDown)
         {
-            RollCounter = 0.2f;
+            RollCounter = 0.3f;
             playerAnim.CrossFadeInFixedTime("Duck", 0.1f);
 
             inRoll = true;
