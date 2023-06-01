@@ -11,6 +11,7 @@ public class Coin : MonoBehaviour
     public float minYPosition = 0.8f;
     private bool isMovingUp = true;
     CoinMove coinMoveScript;
+    public bool isPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,12 @@ public class Coin : MonoBehaviour
     }
     private void Update()
     {
+        if (isPrefab)
+            return;
+
         transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
+
+
         if (isMovingUp)
         {
             transform.Translate(Vector3.up * 1f * Time.deltaTime);

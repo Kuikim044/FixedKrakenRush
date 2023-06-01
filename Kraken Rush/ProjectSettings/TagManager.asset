@@ -10,6 +10,7 @@ TagManager:
   - MultiplierScore
   - PlayerBubble
   - CoinDetector
+  - Obstrucle
   layers:
   - Default
   - TransparentFX

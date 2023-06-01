@@ -61,7 +61,7 @@ public class SpawnCoin : MonoBehaviour
         float laneX = 0f;
         if (laneIndex == 0)
         {
-            laneX = -2.99f;
+            laneX = -4.99f;
         }
         else if (laneIndex == 1)
         {
@@ -69,7 +69,7 @@ public class SpawnCoin : MonoBehaviour
         }
         else if (laneIndex == 2)
         {
-            laneX = 2.99f;
+            laneX = 4.99f;
         }
         return laneX;
     }

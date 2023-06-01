@@ -45,10 +45,18 @@ public class PlayerController : MonoBehaviour
     public Image[] lifeImage;
 
     public static bool isGameover;
+    public static bool isProtection;
+
+
+    private bool isCooldown = false;
+    private float cooldownDuration = 2f;
+    private float cooldownTimer = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
         isGameover = false;
+        isProtection = false;
         transform.position = Vector3.zero;
 
         controller = GetComponent<CharacterController>();
@@ -60,6 +68,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        #region Life Player
+
         if (life <= 0)
             life = 0;
 
@@ -68,7 +78,17 @@ public class PlayerController : MonoBehaviour
             forwardSpeed = 0f;
             return;
         }
+        if (isCooldown)
+        {
+            cooldownTimer += Time.deltaTime;
 
+            if (cooldownTimer >= cooldownDuration)
+            {
+                isCooldown = false;
+            }
+        }
+
+        #endregion
         swipeLeft = Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow);
         swipeRight = Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow);
         swipeUp = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
@@ -119,11 +139,16 @@ public class PlayerController : MonoBehaviour
             {
                 newXPos = -xValue;
                 m_Side = SIDE.Left;
+                playerAnim.CrossFadeInFixedTime("MoveLeft", 0f);
+
             }
             else if (m_Side == SIDE.Right)
             {
                 newXPos = 0;
                 m_Side = SIDE.Mid;
+                playerAnim.CrossFadeInFixedTime("MoveLeft", 0f);
+
+
             }
         }
         if (swipeRight && !inRoll)
@@ -132,11 +157,15 @@ public class PlayerController : MonoBehaviour
             {
                 newXPos = xValue;
                 m_Side = SIDE.Right;
+                playerAnim.CrossFadeInFixedTime("MoveRight", 0f);
+
             }
             else if (m_Side == SIDE.Left)
             {
                 newXPos = 0;
                 m_Side = SIDE.Mid;
+                playerAnim.CrossFadeInFixedTime("MoveRight", 0f);
+
             }
         }
 
@@ -189,7 +218,7 @@ public class PlayerController : MonoBehaviour
         if (swipeDown)
         {
             RollCounter = 0.2f;
-            playerAnim.CrossFadeInFixedTime("Duck", 0f);
+            playerAnim.CrossFadeInFixedTime("Duck", 0.1f);
 
             inRoll = true;
 
@@ -268,8 +297,17 @@ public class PlayerController : MonoBehaviour
 
     private void TakeDmgPlayer()
     {
+        if (isProtection)
+            return;
+
+        if (isCooldown)
+            return;
+
         life -= 1;
         CheckImageLife();
+
+        // ????????????????
+        StartCooldown();
     }
 
     public HitX GetHitX(Collider col)
@@ -333,17 +371,22 @@ public class PlayerController : MonoBehaviour
 
 
     public void CheckImageLife()
-    {
-        int numlife = 3;
-        if (life <= 0)
-        {
-            isGameover = true;         
-        }
+    {        
 
+        int numlife = 3;
         for (int i = numlife - 1; i >= life; i--)
         {
-            lifeImage[i].gameObject.SetActive(false);       
-        }    
+            lifeImage[i].gameObject.SetActive(false);
+        }
 
+        if (life <= 0)
+            isGameover = true;         
+               
+
+    }
+    private void StartCooldown()
+    {
+        isCooldown = true;
+        cooldownTimer = 0f;
     }
 }

@@ -40,7 +40,9 @@ public class ActiveLifeTimeItem : MonoBehaviour
     }
     IEnumerator ActivateProjection()
     {
+        PlayerController.isProtection = true;
         yield return new WaitForSeconds(Singleton.Instance.protection);
+        PlayerController.isProtection = false;
         item.SetActive(false);
     }
     IEnumerator ActivateBonusMode()
